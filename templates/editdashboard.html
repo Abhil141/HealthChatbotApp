@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Dashboard</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/png" href="/assets/logo.png">
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js"></script>
+    <script src="firebase-config.js"></script> <!-- Firebase configuration -->
+    <script type="module" src="server.js"></script>
+    <link rel="stylesheet" href="/static/editdashboard.css">
+
+    
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <h1>MediHelp</h1>
+            <li><a href="loggedin_homepage.html">Home</a></li>
+            <li><a href="loggedin_about.html">About</a></li>
+            <li><a class="active" href="dashboard.html">Dashboard</a></li>
+            <li><a href="profile.html">Profile</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h2>Edit Dashboard</h2>
+
+        <!-- Heart Rate Form -->
+        <div class="form-group">
+            <label for="heartRate" class="form-label">Heart Rate:</label>
+            <input type="number" id="heartRate" class="form-control" placeholder="Enter Heart Rate">
+            <input type="date" id="heartRateDate" class="form-control" placeholder="Select Date">
+            <input type="text" id="heartRateDay" class="form-control" placeholder="Enter Day of the Week">
+        </div>
+
+        <!-- BMI Form -->
+        <div class="form-group">
+            <label class="form-label">Height (cm) and Weight (kg):</label>
+            <input type="number" id="height" class="form-control-small" placeholder="Height">
+            <input type="number" id="weight" class="form-control-small" placeholder="Weight">
+            <button class="btn" id="calculateBmi">Calculate BMI</button>
+            <span id="bmiResult" style="margin-left: 10px; font-weight: bold; color: darkgreen;">--</span>
+        </div>
+
+        <!-- SpO2 Form -->
+        <div class="form-group">
+            <label for="spO2" class="form-label">SpO2:</label>
+            <input type="number" id="spO2" class="form-control" placeholder="Enter SpO2">
+            <input type="date" id="spO2Date" class="form-control" placeholder="Select Date">
+            <input type="text" id="spO2Day" class="form-control" placeholder="Enter Day of the Week">
+        </div>
+
+        <!-- Steps Form -->
+        <div class="form-group">
+            <label for="steps" class="form-label">Steps:</label>
+            <input type="number" id="steps" class="form-control" placeholder="Enter Steps">
+            <input type="date" id="stepsDate" class="form-control" placeholder="Select Date">
+            <input type="text" id="stepsDay" class="form-control" placeholder="Enter Day of the Week">
+        </div>
+
+        <!-- Sleep Form -->
+        <div class="form-group">
+            <label for="sleepDuration" class="form-label">Sleep Duration (in hours):</label>
+            <input type="number" id="sleepDuration" class="form-control" placeholder="Enter Sleep Duration">
+            <input type="date" id="sleepDate" class="form-control" placeholder="Select Date">
+            <input type="text" id="sleepDay" class="form-control" placeholder="Enter Day of the Week">
+        </div>
+
+        <!-- Calories Form -->
+        <div class="form-group">
+            <label for="calories" class="form-label">Calories Burnt:</label>
+            <input type="number" id="calories" class="form-control" placeholder="Enter Calories Burnt">
+            <input type="date" id="caloriesDate" class="form-control" placeholder="Select Date">
+            <input type="text" id="caloriesDay" class="form-control" placeholder="Enter Day of the Week">
+        </div>
+
+        <!-- Delete Data by Date Button -->
+        <form id="deleteDateForm" class="form-group">
+            <label for="deleteDate" class="form-label">Select Date to Delete Data:</label>
+            <input type="date" id="deleteDate" class="form-control" name="deleteDate">
+            <button type="button" class="btn" id="deleteDateButton">Delete Data</button>
+        </form>
+        
+        <div class="btns">
+            <!-- Submit Data Button -->
+            <button class="btn" id="submitData" style="width: 48%;">Submit Data</button>
+
+            <!-- Clear Data Button -->
+            <button class="btn" id="clearData" style="width: 48%;">Clear Data</button>
+        </div>    
+    
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <h2>MediHelp</h2>
+                <p>Your personal health assistant, empowering you with reliable health information.</p>
+            </div>
+            <div class="footer-middle">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#login">Login/Sign Up</a></li>
+                </ul>
+            </div>
+            <div class="footer-newsletter">
+                <h3>Subscribe to Our Newsletter</h3>
+                <form action="#">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+            <div class="footer-right">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="https://facebook.com" target="_blank" class="fab fa-facebook"></a>
+                    <a href="https://instagram.com" target="_blank" class="fab fa-instagram"></a>
+                    <a href="https://twitter.com" target="_blank" class="fab fa-twitter"></a>
+                    <a href="https://linkedin.com" target="_blank" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Backend -->
+    <script>
+        document.getElementById('calculateBmi').addEventListener('click', () => {
+            const height = parseFloat(document.getElementById('height').value) / 100; // Convert height to meters
+            const weight = parseFloat(document.getElementById('weight').value);
+            if (height && weight) {
+                const bmi = (weight / (height * height)).toFixed(2); // Calculate BMI
+                document.getElementById('bmiResult').textContent = bmi; // Display BMI beside the input
+            } else {
+                alert('Please enter valid height and weight values!');
+            }
+        });
+
+        document.getElementById('submitData').addEventListener('click', async () => {
+            try {
+                const healthData = {
+                    username: 'user123', // Replace with Firebase username if available
+                    heartRate: document.getElementById('heartRate').value,
+                    heartRateDate: document.getElementById('heartRateDate').value,
+                    heartRateDay: document.getElementById('heartRateDay').value,
+                    height: document.getElementById('height').value,
+                    weight: document.getElementById('weight').value,
+                    bmi: calculateBMI(),
+                    spO2: document.getElementById('spO2').value,
+                    spO2Date: document.getElementById('spO2Date').value,
+                    spO2Day: document.getElementById('spO2Day').value,
+                    steps: document.getElementById('steps').value,
+                    stepsDate: document.getElementById('stepsDate').value,
+                    stepsDay: document.getElementById('stepsDay').value,
+                    sleepDuration: document.getElementById('sleepDuration').value,
+                    sleepDate: document.getElementById('sleepDate').value,
+                    sleepDay: document.getElementById('sleepDay').value,
+                    calories: document.getElementById('calories').value, 
+                    caloriesDate: document.getElementById('caloriesDate').value, 
+                    caloriesDay: document.getElementById('caloriesDay').value
+                };
+        
+                const response = await fetch('http://localhost:3000/save-health-data', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(healthData),
+                });
+        
+                if (!response.ok) {
+                    // Handle HTTP errors
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+        
+                const message = await response.text();
+                alert(`Submission successful: ${message}`); // Show success message
+            } catch (error) {
+                // Catch and handle any errors
+                console.error('Submission Error:', error);
+                alert('An error occurred during submission. Please try again.');
+            }
+        });
+
+        // Add event listener for "Clear Data" button
+        document.getElementById('clearData').addEventListener('click', () => {
+            const username = 'user123';  // Replace with the actual username if available
+
+            fetch('http://localhost:3000/clear-health-data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username: username })
+            })
+            .then(response => response.text())
+            .then(message => {
+                alert(message); // Show confirmation message
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error clearing data.');
+            });
+        });
+
+        document.getElementById('deleteDateButton').addEventListener('click', () => {
+            const deleteDate = document.getElementById('deleteDate').value;
+            
+            if (deleteDate) {
+                fetch('http://localhost:3000/delete-data-by-date', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ date: deleteDate })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            } else {
+                alert("Please select a date.");
+            }
+        });
+      
+        
+        function calculateBMI() {
+            try {
+                const height = parseFloat(document.getElementById('height').value) / 100;
+                const weight = parseFloat(document.getElementById('weight').value);
+                if (!height || !weight || height <= 0 || weight <= 0) {
+                    throw new Error('Invalid height or weight for BMI calculation.');
+                }
+                return (weight / (height * height)).toFixed(2);
+            } catch (error) {
+                console.error('BMI Calculation Error:', error);
+                alert('Error in BMI calculation. Please check your inputs.');
+                return 'N/A';
+            }
+        }
+        
+    </script>
+    
+    
+</body>
+</html>
+

@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:700&display=swap');
+*{
+	padding: 0;
+	margin: 0;
+	font-family: 'Poppins', sans-serif;
+}
+.wrapper{
+	background: url('/assets/healthbg.jpg') no-repeat;
+	background-size: cover;
+	height: 100vh;
+}
+
+
+.navbar{
+	position: fixed;
+	height: 80px;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.4);
+}
+.navbar .logo{
+	width: 140px;
+	height: auto;
+	padding: 20px 60px;
+}
+.navbar ul{
+	float: right;
+	margin-right: 20px;
+}
+.navbar ul li{
+	list-style: none;
+	margin: 0 8px;
+	display: inline-block;
+	line-height: 80px;
+}
+.navbar ul li a{
+	font-size: 20px;
+	font-family: 'Roboto', sans-serif;
+	color: white;
+	padding: 6px 13px;
+	text-decoration: none;
+	transition: .4s;
+}
+.navbar ul li a.active,
+.navbar ul li a:hover{
+	background: darkred;
+	border-radius: 15px;
+}
+.wrapper .center{
+	position: absolute;
+	left: 50%;
+	top: 55%;
+	transform: translate(-50%, -50%);
+	font-family: sans-serif;
+	user-select: none;
+	color: white;
+	
+}
+.center h1{
+	color: bl;
+	width: 900px;
+	text-align: center;
+	margin-left: 60px;
+	font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	font-size: 120px;
+	font-weight: 480;
+	text-decoration: none;
+	margin-top: 70px;
+}
+.center h2{
+	color: darkred;
+	
+	width: 900px;
+	
+	text-align: center;
+	margin-left: 60px;
+	font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	font-size: 110px;
+	font-weight: 550;
+	text-decoration: none;
+}
+.center p{
+	color: white;
+	font-size: 30px;
+	font-weight: 600;
+	margin-top: 10px;
+
+	margin-left: 60px;
+	width: 885px;
+	text-align:center;
+	font-family: "Kalam", cursive;
+	
+}
+.center .buttons{
+	margin: 35px 280px;
+}
+.buttons button{
+	height: 50px;
+	width: 150px;
+	font-size: 18px;
+	font-weight: 600;
+	background: darkred;
+	outline: none;
+	cursor: pointer;
+	color: white;
+	border-radius: 15px;
+	border: white;
+	transition: .4s;
+	margin-left: 140px;
+	text-decoration: none;
+}
+a{
+	color: white;
+	background-color: transparent;
+	text-decoration: none;
+}
+
+.wrapper h4{
+	font-size: 40px;
+	margin-top: 10px;
+	margin-left: 69px;
+}
+
+
+
+
+
+

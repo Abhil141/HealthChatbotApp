@@ -1,0 +1,260 @@
+html, body {
+    overflow-x: hidden;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('/assets/healthbg.jpg');
+  background-size: cover;
+}
+
+.cover {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  padding-left: 300px; /* Space between the text/logo and the login box */
+}
+
+.intro {
+  width: 50%;
+  font-size:larger;
+  color: darkred;
+  position: absolute;
+  margin-top: 50px;
+  width: 600px;
+  height: 200px;
+}
+
+.intro h1{
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+}
+
+.intro p{
+  color: black;
+font-size: 20px;
+font-weight: 600;
+width: 885px;
+font-family: "Kalam", cursive;
+  margin-top: 5px;
+}
+
+.wrapper {
+  height: 700px;
+  width: 1000px;
+  padding: 150px;
+  border-radius: 20px;
+  text-align: center;
+  justify-content: center;
+  margin-left: -75px;
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  font-size: 38px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  margin-left: 490px;
+  color: black;
+}
+
+form {
+  width: 50%;
+}
+
+.field {
+  margin-bottom: 30px;
+  margin-left: 450px;
+}
+
+.input-area {
+  position: relative;
+}
+
+input {
+  width: 100;
+  padding: 0 45px;
+  height: 50px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input:focus {
+  border-color: #5372F0;
+}
+
+input::placeholder {
+  color: #ccc;
+}
+
+/* Icon style */
+.field .input-area i {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  display: none; /* Hidden by default */
+}
+
+/* Show green tick when valid */
+.field.valid .input-area i.valid-icon {
+  color: #28a745; /* Green tick for valid input */
+  display: block;
+  content: "\2714"; /* Unicode for check mark */
+}
+
+/* Show red exclamation when error */
+.field.error .input-area i.error-icon {
+  color: #dc3545; /* Red exclamation for error */
+  display: block;
+  content: "\f06a"; /* Unicode for exclamation mark */
+}
+
+/* Hide error icon when valid and vice versa */
+.field.valid .input-area i.error-icon {
+  display: none;
+}
+
+.field.error .input-area i.valid-icon {
+  display: none;
+}
+
+.field.error input {
+  border-color: #dc3545; /* Red border for error */
+}
+
+.field.valid input {
+  border-color: #28a745; /* Green border for valid */
+}
+
+input[type="submit"] {
+  background: darkred;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  margin-left: 560px;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+a:visited {
+color: black;
+background-color: transparent;
+text-decoration: none;
+}
+
+.sign-txt{
+  margin-left: 500px;
+}
+
+input[type="submit"]:hover {
+  background: darkred;
+}
+
+.pass-txt{
+  white-space: normal; 
+  width: 100%; 
+  margin-left: 420px;
+  margin-bottom: 30px;
+}
+.alert{
+  background: #ffdb9b;
+  padding: 20px 40px;
+  min-width: 420px;
+  position: absolute;
+  right: 0;
+  top: 10px;
+  border-radius: 4px;
+  border-left: 8px solid #ffa502;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+.alert.showAlert{
+  opacity: 1;
+  pointer-events: auto;
+}
+.alert.show{
+  animation: show_slide 1s ease forwards;
+}
+@keyframes show_slide {
+  0%{
+    transform: translateX(100%);
+  }
+  40%{
+    transform: translateX(-10%);
+  }
+  80%{
+    transform: translateX(0%);
+  }
+  100%{
+    transform: translateX(-10px);
+  }
+}
+.alert.hide{
+  animation: hide_slide 1s ease forwards;
+}
+@keyframes hide_slide {
+  0%{
+    transform: translateX(-10px);
+  }
+  40%{
+    transform: translateX(0%);
+  }
+  80%{
+    transform: translateX(-10%);
+  }
+  100%{
+    transform: translateX(100%);
+  }
+}
+.alert .fa-exclamation-circle{
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ce8500;
+  font-size: 30px;
+}
+.alert .msg{
+  padding: 0 20px;
+  font-size: 18px;
+  color: #ce8500;
+}
+.alert .close-btn{
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ffd080;
+  padding: 20px 18px;
+  cursor: pointer;
+}
+.alert .close-btn:hover{
+  background: #ffc766;
+}
+.alert .close-btn .fas{
+  color: #ce8500;
+  font-size: 22px;
+  line-height: 40px;
+}

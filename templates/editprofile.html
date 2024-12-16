@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/png" href="/assets/logo.png">
+    <link rel="stylesheet" href="/static/editprofile.css">
+</head>
+<body>
+    <div class="alert hide">
+        <span class="message"></span>
+        <span class="close-btn">&times;</span>
+    </div>  
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h1>MediHelp</h1>
+        <ul>
+            <li><a href="loggedin_homepage.html">Home</a></li>
+            <li><a href="loggedin_about.html">About</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a class="active" href="profile.html">Profile</a></li>
+        </ul>
+    </nav>
+
+    <!-- Form Container -->
+    <div class="form-container">
+        <h1>Edit Profile</h1>
+        <form id="edit-profile-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" >
+            </div>
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" >
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" >
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" >
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address" >
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob" >
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" >
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit">Save Changes</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-left">
+                <h2>MediHelp</h2>
+                <p>Your personal health assistant, empowering you with reliable health information.</p>
+            </div>
+            <div class="footer-middle">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Our Services</a></li>
+                    <li><a href="#login">Login/Sign Up</a></li>
+                </ul>
+            </div>
+            <div class="footer-newsletter">
+                <h3>Subscribe to Our Newsletter</h3>
+                <form action="#">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+            <div class="footer-right">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="https://facebook.com" target="_blank" class="fab fa-facebook"></a>
+                    <a href="https://instagram.com" target="_blank" class="fab fa-instagram"></a>
+                    <a href="https://twitter.com" target="_blank" class="fab fa-twitter"></a>
+                    <a href="https://linkedin.com" target="_blank" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-auth.js';
+        import { getFirestore, doc, updateDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js';
+        import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.13.1/firebase-storage.js';
+    
+        const firebaseConfig = {
+            apiKey: "AIzaSyDbPH1f2-GvKgVF6A83d_ssbgR8c2da00A",
+            authDomain: "health-chatbot-18438.firebaseapp.com",
+            projectId: "health-chatbot-18438",
+            storageBucket: "health-chatbot-18438.appspot.com",
+            messagingSenderId: "192711634499",
+            appId: "1:192711634499:web:1f01d5a179e1c6be1feef6"
+        };
+    
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+    
+        const editProfileForm = document.getElementById("edit-profile-form");
+        const profileImageInput = document.getElementById("profileImage");
+    
+        // Update user data on form submission
+        editProfileForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+    
+            const user = auth.currentUser;
+            if (!user) {
+                alert("No user is signed in.");
+                return;
+            }
+    
+            const userData = {
+                username: document.getElementById("username").value,
+                fullName: document.getElementById("fullName").value,
+                email: document.getElementById("email").value,
+                phone: document.getElementById("phone").value,
+                address: document.getElementById("address").value,
+                dob: document.getElementById("dob").value,
+                gender: document.getElementById("gender").value
+            };
+    
+            try {
+                const userDocRef = doc(db, "users", user.uid);
+                console.log("Updating Firestore with new data:", userData);
+                await updateDoc(userDocRef, userData);
+                console.log("Firestore update successful!");
+    
+                // Check if a new profile image was selected
+                if (profileImageInput.files.length > 0) {
+                    const file = profileImageInput.files[0];
+                    const fileType = file.type;
+    
+                    // Check for valid file types (png, jpg, jpeg)
+                    if (fileType === "image/png" || fileType === "image/jpeg") {
+                        console.log("Uploading profile image...");
+                        const storageRef = ref(storage, `profileImages/${user.uid}`);
+                        const uploadResult = await uploadBytes(storageRef, file);
+                        console.log("Image uploaded successfully:", uploadResult);
+    
+                        // Get the download URL and update Firestore with image URL
+                        const downloadURL = await getDownloadURL(storageRef);
+                        console.log("Download URL retrieved:", downloadURL);
+                        await updateDoc(userDocRef, { profileImageUrl: downloadURL });
+                        console.log("Firestore updated with image URL.");
+    
+                        alert("Profile updated successfully!");
+                    } else {
+                        
+                    }
+                } else {
+                    alert("Profile updated successfully.");
+                }
+            } catch (error) {
+                console.error("Error during profile update:", error);
+            }
+    
+            // Redirect to the profile page after updating
+            window.location.href = "profile.html";
+        });
+    
+        // Fetch and display existing user profile data
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const userDocRef = doc(db, "users", user.uid);
+                getDoc(userDocRef).then((doc) => {
+                    if (doc.exists()) {
+                        const data = doc.data();
+                        document.getElementById("username").value = data.username || "";
+                        document.getElementById("fullName").value = data.fullName || "";
+                        document.getElementById("email").value = data.email || "";
+                        document.getElementById("phone").value = data.phone || "";
+                        document.getElementById("address").value = data.address || "";
+                        document.getElementById("dob").value = data.dob || "";
+                        document.getElementById("gender").value = data.gender || "Male";
+                    } else {
+                        console.error("No user data found.");
+                        alert("No user data found.");
+                    }
+                }).catch((error) => {
+                    console.error("Error fetching user data:", error);
+                    alert("Error fetching profile data. Please try again.");
+                });
+            } else {
+                alert("User not signed in.");
+                window.location.href = "login.html";
+            }
+        });
+    </script>
+    
+
+</body>
+</html>

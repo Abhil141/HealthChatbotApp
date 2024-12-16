@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-image: url(/assets/healthbg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
+}
+
+.navbar {
+    height: 80px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.navbar h1 {
+    float: left;
+    color: white;
+    margin-right: 750px;
+    font-size: 2rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    margin-top: auto;
+}
+
+.navbar ul {
+    float: right;
+    margin-right: 15px;
+}
+
+.navbar ul li {
+    list-style: none;
+    margin: 0px 8px;
+    display: inline-block;
+    line-height: 45px;
+}
+
+.navbar ul li a {
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    padding: 6px 13px;
+    text-decoration: none;
+    transition: .4s;
+    font-weight: 500;
+}
+
+.navbar ul li a.active,
+.navbar ul li a:hover {
+    background: darkred;
+    border-radius: 15px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 100px auto 20px; /* Added margin to prevent overlap with navbar */
+    padding: 20px;
+    color: white;
+}
+
+.container h1 {
+    text-align: center;
+    margin-top: -50px;
+    margin-bottom: 10px;
+    font-size: 2.5rem; /* Increased font size for visibility */
+    font-weight: 700; /* Bolder font for prominence */
+    color: #ffffff; /* White color for contrast */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Added text shadow for better visibility */
+}
+
+.hello-message {
+    text-align: center;
+    font-size: 1.5rem; /* Increased font size for visibility */
+    margin-bottom: 30px; /* Spacing below message */
+    color: #ffffff; /* White color for contrast */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Added text shadow for better visibility */
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.8); /* Updated background */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Updated box-shadow */
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s;
+    color: black; /* Set all text in cards to black */
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.ring-chart {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+/* Improved styling for titles above cards */
+.card h2 {
+    font-size: 1.5rem; /* Adjusted font size */
+    margin-bottom: 15px; /* Spacing below title */
+    color: black; /* Text color */
+}
+
+.edit-dashboard-button {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    transition: transform(1.05);
+}
+
+.edit-dashboard-button:hover {
+    background-color: #2e86bd;
+}
+
+/* Footer Section */
+footer {
+    background-color: #314d5f;
+    color: white;
+    padding: 2rem 5%;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-left,
+.footer-middle,
+.footer-newsletter,
+.footer-right {
+    flex: 1;
+    padding: 1rem;
+}
+
+.footer-left h2 {
+    margin: 0;
+}
+
+.footer-middle h3,
+.footer-newsletter h3,
+.footer-right h3 {
+    margin-top: 1rem;
+}
+
+.footer-middle ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-middle ul li {
+    margin: 0.5rem 0;
+}
+
+.footer-middle ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-newsletter form {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-newsletter input {
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: none;
+    border-radius: 5px;
+}
+
+.footer-newsletter button {
+    padding: 0.5rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.footer-newsletter button:hover {
+    background-color: #2e86bd;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 1rem;
+}
+
+.social-icons a {
+    margin-right: 1rem;
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+/* Chart styles */
+canvas {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.steps-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 250px; /* Adjusted height */
+}
+
+.steps-chart,
+.calories-chart {
+    flex: 1;
+    position: relative;
+    height: 140px; /* Adjusted height to make them the same size */
+    padding: 10px; /* Add padding for better fit */
+    width: 100%; /* Ensure charts take full width */
+}
+
+.calories-chart {
+    height: 140px; /* Same height as steps-chart */
+}
+
+
+.activity-metric {
+    text-align: center; /* Align text to the left */
+    margin-top: 30px; /* Moved margin to center the text in the card */
+}
+

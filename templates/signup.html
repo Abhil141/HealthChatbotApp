@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Health Assistant</title>
+    <link rel="stylesheet" href="/static/signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/assets/logo.png">
+</head>
+
+<body>
+    <div class="alert hide">
+        <span class="message"></span>
+        <span class="close-btn">&times;</span>
+    </div>
+    
+    <div class="cover">
+        <div class="intro">
+            <h1>MediHelp</h1>
+            <p>Smart health insights at your fingertips!</p>
+        </div>
+        <div class="wrapper">
+            <header>Sign Up</header>
+            <form id="signup-form">
+                <div class="field name">
+                    <div class="input-area">
+                        <input type="text" id="signup-name" placeholder="Name" required>
+                        <i class="icon fas fa-user"></i>
+                        <i class="error error-icon fas fa-exclamation-circle"></i>
+                        <i class="success check-icon fas fa-check-circle"></i>
+                    </div>
+                </div>
+                <div class="field email">
+                    <div class="input-area">
+                        <input type="email" id="signup-email" placeholder="Email" required>
+                        <i class="icon fas fa-envelope"></i>
+                        <i class="error error-icon fas fa-exclamation-circle"></i>
+                        <i class="success check-icon fas fa-check-circle"></i>
+                    </div>
+                </div>
+                <div class="field password">
+                    <div class="input-area">
+                        <input type="password" id="signup-password" placeholder="Password" required>
+                        <i class="icon fas fa-lock"></i>
+                        <i class="error error-icon fas fa-exclamation-circle"></i>
+                        <i class="success check-icon fas fa-check-circle"></i>
+                    </div>
+                </div>
+                <input type="submit" value="Sign Up">
+            </form>
+            <div class="sign-txt">Already a Member? <a href="login.html">Login now</a></div>
+        </div>
+    </div>
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-app.js';
+        import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js';
+    
+        // Firebase configuration object
+        const firebaseConfig = {
+            apiKey: "AIzaSyDbPH1f2-GvKgVF6A83d_ssbgR8c2da00A",
+            authDomain: "health-chatbot-18438.firebaseapp.com",
+            projectId: "health-chatbot-18438",
+            storageBucket: "health-chatbot-18438.appspot.com",
+            messagingSenderId: "192711634499",
+            appId: "1:192711634499:web:1f01d5a179e1c6be1feef6",
+            measurementId: "G-MT6LH1ZCYN"
+        };
+    
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+    
+        // Function to show alerts
+        function showAlert(message, type) {
+            const alertBox = document.querySelector('.alert');
+            alertBox.classList.remove('hide');
+            alertBox.classList.add('show', 'showAlert');
+            alertBox.querySelector('.message').textContent = message;
+            alertBox.classList.remove('success', 'error');
+            alertBox.classList.add(type); // Add success or error class dynamically
+            setTimeout(() => {
+                alertBox.classList.remove('show');
+                alertBox.classList.add('hide');
+            }, 5000);
+        }
+    
+        // Handle signup form submission
+        document.getElementById('signup-form')?.addEventListener('submit', async (e) => {
+            e.preventDefault();
+    
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+    
+            try {
+                await createUserWithEmailAndPassword(auth, email, password);
+                showAlert('Sign Up Successful!', 'success');
+                setTimeout(() => {
+                    window.location.href = 'login.html'; // Redirect to login page
+                }, 1500); // Redirect after alert
+            } catch (error) {
+                console.error('Error signing up:', error.message);
+                showAlert('Error: ' + error.message, 'error');
+            }
+        });
+    
+        // Input validation
+        document.querySelectorAll('.input-area input').forEach(input => {
+            input.addEventListener('input', function () {
+                const parent = this.closest('.field');
+                if (this.value.trim() !== '') {
+                    parent.classList.add('valid');
+                    parent.classList.remove('error');
+                    parent.querySelector('.error').style.display = 'none';
+                    parent.querySelector('.success').style.display = 'block';
+                } else {
+                    parent.classList.remove('valid');
+                    parent.classList.add('error');
+                    parent.querySelector('.error').style.display = 'block';
+                    parent.querySelector('.success').style.display = 'none';
+                }
+            });
+        });
+    
+        // Close alert
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('close-btn')) {
+                const alertBox = document.querySelector('.alert');
+                alertBox.classList.remove('show');
+                alertBox.classList.add('hide');
+            }
+        });
+    </script>
+    
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:700&display=swap');
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url(/assets/healthbg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-blend-mode: overlay;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    height: 80px;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.navbar h1 {
+    float: left;
+    color: white;
+    margin-right: 750px;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: auto;
+}
+
+.navbar ul {
+    float: right;
+    margin-right: 15px;
+}
+
+.navbar ul li {
+    list-style: none;
+    margin: 0px 8px;
+    display: inline-block;
+    line-height: 45px;
+}
+
+.navbar ul li a {
+    font-size: 18px;
+    color: white;
+    padding: 6px 12px;
+    text-decoration: none;
+    transition: .4s;
+    font-weight: 500;
+}
+
+.navbar ul li a.active,
+.navbar ul li a:hover {
+    background: darkred;
+    border-radius: 15px;
+}
+
+.container {
+    padding: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    font-weight: 600;
+    font-size: 14px;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+.form-control-small {
+    width: 48%;
+    display: inline-block;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    margin-right: 4%;
+}
+
+.form-control-small:last-child {
+    margin-right: 0;
+}
+
+.btn {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+#submitData{
+    margin-right: 25px;
+}
+
+.btns{
+    margin-bottom: 20px;
+}
+
+footer {
+    background-color: #314d5f;
+    color: white;
+    padding: 2rem 5%;
+    text-align: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-left,
+.footer-middle,
+.footer-newsletter,
+.footer-right {
+    flex: 1;
+    padding: 1rem;
+    margin: 10px;
+}
+
+.footer-left h2 {
+    margin: 0;
+}
+
+.footer-middle h3,
+.footer-newsletter h3,
+.footer-right h3 {
+    margin-top: 1rem;
+}
+
+.footer-middle ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-middle ul li {
+    margin: 0.5rem 0;
+}
+
+.footer-middle ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-newsletter form {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-newsletter input {
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: none;
+    border-radius: 5px;
+}
+
+.footer-newsletter button {
+    padding: 0.5rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.footer-newsletter button:hover {
+    background-color: #2e86bd;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 1rem;
+}
+
+.social-icons a {
+    margin-right: 1rem;
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+}

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Dashboard</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" type="image/png" href="/assets/logo.png">
+    <link rel="stylesheet" href="/static/dashboard.css">
+    
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <h1>MediHelp</h1>
+            <li><a href="loggedin_homepage.html">Home</a></li>
+            <li><a href="loggedin_about.html">About</a></li>
+            <li><a class="active" href="dashboard.html">Dashboard</a></li>
+            <li><a href="profile.html">Profile</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+    <h1>Health Dashboard</h1>
+    <div class="hello-message">Hello, welcome to your health dashboard!</div>
+
+    <div class="grid">
+        <!-- Heart Rate Line Graph Card -->
+        <div class="card">
+            <h2>Heart Rate</h2>
+            <canvas id="heartRateChart"></canvas>
+        </div>
+
+        <!-- Height, Weight, and BMI Card -->
+        <div class="card">
+            <h2>Height, Weight & BMI</h2>
+            <div class="metric">
+                <p><strong>Height: </strong><span id="height-value">--</span></p>
+                <p><strong>Weight: </strong><span id="weight-value">--</span></p>
+                <p><strong>BMI: </strong><span id="bmi-value">--</span></p>
+            </div>
+        </div>
+
+
+        <!-- SpO2 Line Graph Card -->
+        <div class="card">
+            <h2>SpO2 Levels</h2>
+            <canvas id="spo2Chart"></canvas>
+        </div>
+
+        <!-- Steps Chart Card -->
+        <div class="card">
+            <h2>Steps Count</h2>
+            <div class="steps-container">
+                <div class="steps-chart">
+                    <canvas id="stepsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calories Charts Card -->
+        <div class="card">
+            <h2>Calories</h2>
+            <div class="calories-container">
+                <div class="calories-chart">
+                    <canvas id="caloriesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sleep Patterns Card -->
+        <div class="card">
+            <h2>Sleep Patterns</h2>
+            <div class="sleep-container">
+                <div class="sleep-chart">
+                    <canvas id="sleepChart"></canvas>
+                </div>
+            </div>        
+        </div>
+
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="editdashboard.html" class="edit-dashboard-button">Edit Dashboard</a>
+    </div>
+</div>
+
+<!-- Footer Section -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-left">
+            <h2>MediHelp</h2>
+            <p>Your personal health assistant, empowering you with reliable health information.</p>
+        </div>
+        <div class="footer-middle">
+            <h3>Useful Links</h3>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#services">Our Services</a></li>
+                <li><a href="#login">Login/Sign Up</a></li>
+            </ul>
+        </div>
+        <div class="footer-newsletter">
+            <h3>Subscribe to Our Newsletter</h3>
+            <form action="#">
+                <input type="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+        <div class="footer-right">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="https://facebook.com" target="_blank" class="fab fa-facebook"></a>
+                <a href="https://instagram.com" target="_blank" class="fab fa-instagram"></a>
+                <a href="https://twitter.com" target="_blank" class="fab fa-twitter"></a>
+                <a href="https://linkedin.com" target="_blank" class="fab fa-linkedin"></a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Initialize empty charts
+    const heartRateChart = new Chart(document.getElementById('heartRateChart').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Heart Rate (bpm)',
+                data: [0, 0, 0, 0, 0, 0, 0],
+                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                fill: true,
+                tension: 0.3
+            }]
+        }
+    });
+
+    const spo2Chart = new Chart(document.getElementById('spo2Chart').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'SpO2 (%)',
+                data: [0, 0, 0, 0, 0, 0, 0],
+                borderColor: 'rgba(54, 162, 235, 1)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                fill: true,
+                tension: 0.3
+            }]
+        }
+    });
+
+    const stepsChart = new Chart(document.getElementById('stepsChart').getContext('2d'), {
+        type: 'bar',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Steps',
+                data: [0, 0, 0, 0, 0, 0, 0],
+                backgroundColor: 'rgba(75, 192, 192, 1)',
+            }]
+        }
+    });
+
+
+    const caloriesChart = document.getElementById('caloriesChart').getContext('2d');
+    new Chart(caloriesChart, {
+        type: 'bar',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Calories Burned',
+                data: [243, 416, 394, 288, 312, 191, 237],
+                backgroundColor: 'rgba(255, 159, 64, 1)',
+            }]
+        }
+    });
+
+
+    
+
+    const sleepChart = new Chart(document.getElementById('sleepChart').getContext('2d'), {
+        type: 'line',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Sleep Duration (hours)',
+                data: [0, 0, 0, 0, 0, 0, 0],
+                borderColor: 'rgba(153, 102, 255, 1)',
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                fill: true,
+                tension: 0.3
+            }]
+        }
+    });
+
+    // Fetch the data from the server
+    fetch('http://localhost:3000/health-data')
+    
+    .then(response => response.json())
+    .then(data => {
+        
+        // Extract data from the response
+        const heartRateDays = data.map(entry => entry.heartRateDay); // Get the day directly from the database
+        const heartRates = data.map(entry => entry.heartRate); // Heart rates
+        const spo2Days = data.map(entry => entry.spO2Day); // Days for SpO2
+        const spo2Levels = data.map(entry => entry.spO2); // SpO2 levels
+        const stepsDays = data.map(entry => entry.stepsDay); // Days for Steps
+        const steps = data.map(entry => entry.steps); // Steps
+        const sleepDays = data.map(entry => entry.sleepDay); // Days for Sleep
+        const sleep = data.map(entry => entry.sleepDuration); // Sleep duration
+        const caloriesDays = data.map(entry => entry.caloriesDay); // Days for calories
+        const calories = data.map(entry => entry.calories); // calories
+
+        // Extract the most recent height, weight, and BMI (assuming last entry is the latest)
+        const latestEntry = data[data.length - 1];
+        const height = latestEntry ? latestEntry.height : '--';
+        const weight = latestEntry ? latestEntry.weight : '--';
+        const bmi = latestEntry ? latestEntry.bmi : '--';
+        
+        // Update the height, weight, and BMI values in the DOM
+        document.getElementById('height-value').textContent = height !== '--' ? `${height} cm` : '--';
+        document.getElementById('weight-value').textContent = weight !== '--' ? `${weight} kg` : '--';
+        document.getElementById('bmi-value').textContent = bmi !== '--' ? `${bmi}` : '--';
+
+        // Update the charts with the fetched data
+        heartRateChart.data.labels = heartRateDays;
+        heartRateChart.data.datasets[0].data = heartRates;
+        heartRateChart.update();
+
+        spo2Chart.data.labels = spo2Days;
+        spo2Chart.data.datasets[0].data = spo2Levels;
+        spo2Chart.update();
+
+        stepsChart.data.labels = stepsDays;
+        stepsChart.data.datasets[0].data = steps;
+        stepsChart.update();
+
+        sleepChart.data.labels = sleepDays;
+        sleepChart.data.datasets[0].data = sleep;
+        sleepChart.update();
+
+        caloriesChart.data.labels = caloriesDays;
+        caloriesChart.data.datasets[0].data = calories;
+        caloriesChart.update();
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+
+</script>
+</body>
+</html>
